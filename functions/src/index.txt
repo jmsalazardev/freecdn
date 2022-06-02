@@ -1,0 +1,63 @@
+import * as functions from "firebase-functions";
+import * as firebaseAdmin from "firebase-admin";
+import {initializeApp} from "firebase/app";
+import {Firestore, getFirestore} from "firebase/firestore";
+
+import "reflect-metadata";
+import {Container} from "typedi";
+import {AlbumSynchronizer} from "./use-cases";
+
+import firebaseConfig from "./config/firebase-config.json";
+import adminConfig from "./config/firebase-admin.json";
+import {AlbumFirebaseRepository, PhotoFirebaseRepository} from "./repositories";
+
+
+const admin = firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert({
+    projectId: adminConfig.project_id,
+    clientEmail: adminConfig.client_email,
+    privateKey: adminConfig.private_key,
+    ...adminConfig,
+  }),
+});
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+// const storage = getStorage(app);
+
+Container.set(Firestore, db);
+Container.set("AlbumBucket", admin.storage().bucket("gs://gphotos-cdn.appspot.com"));
+Container.set("Logger", functions.logger);
+Container.set("AlbumRepository", Container.get(AlbumFirebaseRepository));
+Container.set("PhotoRepository", Container.get(PhotoFirebaseRepository));
+
+// Start writing Firebase Functions
+// https://firebase.google.com/docs/functions/typescript
+
+export const helloWorld = functions.https.onRequest((request, response) => {
+  response.send("Hello from Firebase!");
+});
+
+
+export const sync = functions.runWith({
+  // memory: "1GB",
+}).https.onRequest(async (req, res) => {
+  const {id, key} = req.query;
+  // TODO: Implements access key validation
+  if (!key || key !== id) {
+    res.status(401).json({
+      code: 401,
+      message: "Unauthorized",
+    });
+    return;
+  }
+
+  const url = `https://photos.app.goo.gl/${id}`;
+  const albumSynchronizer = Container.get(AlbumSynchronizer);
+  await albumSynchronizer.execute({url});
+
+  res.status(200).json({
+    code: 200,
+    message: "OK",
+  });
+});

@@ -1,0 +1,64 @@
+import Puppeteer, {Browser, Page} from "puppeteer";
+import {Service} from "typedi";
+
+@Service()
+export class BrowserService {
+  private browserInstance: Browser;
+
+  async getBrowser(): Promise<Browser> {
+    if (this.browserInstance == null) {
+      const userAgent = "--user-agent=\"Mozilla/5.0 " +
+        "(Macintosh; Intel Mac OS X 10_12_6) " +
+        "AppleWebKit/537.36 (KHTML, like Gecko) " +
+        "Chrome/65.0.3312.0 Safari/537.36\"";
+
+      const args = [
+        "--no-sandbox",
+        // '--disable-setuid-sandbox',
+        "--disable-infobars",
+        "--window-position=0,0",
+        "--ignore-certifcate-errors",
+        "--ignore-certifcate-errors-spki-list",
+        userAgent,
+        // '--proxy-server=socks5://127.0.0.1:9050',
+      ];
+
+      this.browserInstance = await Puppeteer.launch({
+        ignoreDefaultArgs: ["--enable-automation"],
+        args,
+        headless: true,
+        ignoreHTTPSErrors: true,
+        userDataDir: "./data/user_data",
+      });
+    }
+    return this.browserInstance;
+  }
+
+  async newPage(): Promise<Page> {
+    const browser = await this.getBrowser();
+
+    const page = await browser.newPage();
+    await page.setViewport({width: 1024, height: 768});
+    page.setDefaultNavigationTimeout(0);
+
+    await page.setExtraHTTPHeaders({
+      "user-agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+        "AppleWebKit/537.36 (KHTML, like Gecko) " +
+        "Chrome/90.0.4430.93 Safari/537.36",
+      "upgrade-insecure-requests": "1",
+      "accept":
+        "text/html,application/xhtml+xml,application/xml;q=0.9," +
+        "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+      "accept-encoding": "gzip, deflate, br",
+      "accept-language": "en-US,en;q=0.9,en;q=0.8",
+    });
+
+    return page;
+  }
+
+  async close(): Promise<void> {
+    const browser = await this.getBrowser();
+    browser.close();
+  }
+}

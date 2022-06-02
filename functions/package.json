@@ -1,0 +1,46 @@
+{
+  "name": "functions",
+  "scripts": {
+    "lint": "eslint --ext .ts .",
+    "lint:fix": "eslint --fix --ext .ts .",
+    "clean": "npx rimraf lib/",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@google-cloud/storage": "^6.0.0",
+    "@types/mime-types": "^2.1.1",
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.11",
+    "firebase": "^9.8.2",
+    "firebase-admin": "^10.2.0",
+    "firebase-functions": "^3.21.2",
+    "json5": "^2.2.1",
+    "mime-types": "^2.1.35",
+    "node-blob": "^0.0.2",
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.10.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^3.9.1",
+    "@typescript-eslint/parser": "^3.8.0",
+    "eslint": "^7.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.22.0",
+    "firebase-functions-test": "^0.2.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.6.4"
+  },
+  "private": true
+}

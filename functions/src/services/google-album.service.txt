@@ -1,0 +1,118 @@
+import path from "path";
+import fs from "fs";
+import {Inject, Service} from "typedi";
+import axios from "axios";
+import {BrowserService} from "./browser.service";
+import {GoogleAlbum} from "../interfaces/google-album";
+import {GooglePhoto} from "../interfaces/google-photo";
+import {Logger} from "../interfaces";
+
+@Service()
+export class GoogleAlbumService2 {
+  @Inject("Logger")
+  private readonly logger: Logger;
+
+  private albumScript: string;
+
+  constructor(private readonly browserService: BrowserService) {
+    const scriptsPath = path.join(__dirname, "..", "scripts");
+    const filename = `${scriptsPath}/album.js`;
+    this.albumScript = fs.readFileSync(filename, "utf8");
+  }
+
+  async getAlbum(url: string): Promise<GoogleAlbum | undefined> {
+    this.logger.info("getAlbum", {url});
+    const page = await this.browserService.newPage();
+
+    this.logger.debug("loading album content", {url});
+    await page.goto(url, {
+      waitUntil: "domcontentloaded",
+    });
+
+    await page.waitForNavigation({
+      waitUntil: "networkidle2",
+    });
+
+    this.logger.debug("extracting album data", {url});
+    const result = await page.evaluate(this.albumScript) as unknown;
+
+    await this.browserService.close();
+    this.logger.debug("album data extracted", {url});
+    return result as GoogleAlbum;
+  }
+
+  async getPhoto(
+      photoId: string,
+      key: string
+  ): Promise<GooglePhoto | undefined> {
+    const rpcid = "fDcn4b";
+    const qReq = [[[rpcid, JSON.stringify([photoId, 1, key]), null, "1"]]];
+    const bodyData = `f.req=${JSON.stringify(qReq)}`;
+    this.logger.debug(bodyData);
+
+    const res = await axios.post(
+        "https://photos.google.com/_/PhotosUi/data/batchexecute",
+        bodyData,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          },
+        }
+    );
+    let data = res.data.replace(")]}'", "");
+    data = JSON.parse(data);
+    data = JSON.parse(data[0][2]);
+    const [id, description, filename, createdAt, , size, width, height] =
+      data[0];
+
+    return {
+      id,
+      description,
+      filename,
+      createdAt,
+      size,
+      width,
+      height,
+    };
+  }
+
+  async getPhotosByIds(
+      key: string,
+      photoIds: string[],
+  ): Promise<GooglePhoto[]> {
+    const rpcid = "fDcn4b";
+    const queryData = photoIds.map(
+        (photoId) => [rpcid, JSON.stringify([photoId, null, key])]
+    );
+
+    const bodyData = `f.req=${JSON.stringify([queryData])}`;
+    const res = await axios.post(
+        "https://photos.google.com/_/PhotosUi/data/batchexecute",
+        bodyData,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          },
+        }
+    );
+
+    const data = res.data.replace(")]}'", "");
+    const list = JSON.parse(data);
+    return list.filter((item: string[]) => item[1] === rpcid)
+        .map((item: string[]) => {
+          const [, , responseText] = item;
+          const jsonObj = JSON.parse(responseText);
+          const [id, description, filename, createdAt, , size, width, height] =
+            jsonObj[0];
+          return {
+            id,
+            description,
+            filename,
+            createdAt,
+            size,
+            width,
+            height,
+          };
+        });
+  }
+}
