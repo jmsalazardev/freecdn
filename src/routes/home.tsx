@@ -10,11 +10,11 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-import LinkIcon from '@mui/icons-material/Link';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function Home() {
   const openScraperWindow = () => {
-    window.open('https://github.com/jmsalazardev/gphotos-scraper', '_blank');
+    window.open('https://github.com/jmsalazardev/gphotos-cdn', '_blank');
   };
   
   return (
@@ -27,7 +27,7 @@ export default function Home() {
               component='div'
               sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-              GPHOTOS GALLERY
+              GPHOTOS-CDN
             </Typography>
         </Toolbar>
         </AppBar>
@@ -45,15 +45,13 @@ export default function Home() {
             <ListItem disablePadding onClick={() => { openScraperWindow() }}>
               <ListItemButton>
                 <ListItemIcon>
-                  <LinkIcon />
+                  <GitHubIcon />
                 </ListItemIcon>
-                <ListItemText primary="gPhotos Scraper" />
+                <ListItemText primary="Repository" />
               </ListItemButton>
             </ListItem>
           </List>
-          
         </nav>
-          
     </Box>
   );
 }
