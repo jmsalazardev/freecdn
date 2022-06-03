@@ -15,7 +15,6 @@ export default function Login() {
     event.preventDefault();
 
     const { username, password } = credential;
-    console.log({ username, password });
     if (username.trim().length === 0) {
       setSnackbar({ warning: 'Please enter your username' });
       return;
@@ -28,12 +27,10 @@ export default function Login() {
 
     if (username === '' || password === '') return;
 
-    logIn(username, password).then((user: User) => {
-      console.log(user);
+    logIn(username, password).then(() => {
       navigate('/', { replace: true });
     }).catch((reason) => {
       setSnackbar({ error: reason.message });
-
     });
 
   };

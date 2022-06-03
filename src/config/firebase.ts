@@ -10,8 +10,6 @@ const {
     REACT_APP_FIREBASE_MEASUREMENT_ID: measurementId,
   } = process.env;
 
-  console.log('process.env:', process.env);
-  
   export const firebaseConfig =  {
     apiKey,
     authDomain,

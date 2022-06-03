@@ -12,7 +12,6 @@ export const getCurrentUser = (): User => {
 };
 
 onAuthStateChanged(auth, (user) => {
-    console.log('onAuthStateChanged', user);
   if (user) {
       sessionStorage.setItem('user', JSON.stringify(user));
     // User is signed in, see docs for a list of available properties

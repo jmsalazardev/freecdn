@@ -32,11 +32,8 @@ function AddAlbum(props: AddAlbumProps, ref: Ref<{show: Function}>) {
     const handleAdd = () => {
         setOpen(false);
         if (url) {
-            // https://photos.app.goo.gl/mkvGayXkFwf4jDnn6
             const albumUrl = new URL(url);
             const [,id] = albumUrl.pathname.split('/');
-            // const id = 'mkvGayXkFwf4jDnn6';
-            console.log('id:', id);
             dispatch(addAlbum(`${id}`));
         }
         

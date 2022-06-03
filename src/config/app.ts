@@ -8,7 +8,6 @@ const {
     REACT_APP_API_URL: apiUrl,
 } = process.env;
 
-console.log({apiUrl});
 export const appConfig = {
     publicUrl,
     isDev: env === 'development',

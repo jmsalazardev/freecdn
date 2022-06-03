@@ -12,7 +12,6 @@ export const ProtectedRoute = ({ children }: Props) => {
   const logged = isLoggedIn();
 
   useEffect(() => {
-    console.log({logged});
     if (!logged)  navigate('/login');
 
     // setIsAuthenticated(logged);
