@@ -3,7 +3,6 @@ import Typography from '@mui/material/Typography';
 import { Button, Container, Grid, TextField } from '@mui/material';
 import { logIn } from '../services/auth-service';
 import SimpleSnackbar from '../components/SimpleSnackbar';
-import { User } from '../models';
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
