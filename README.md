@@ -1,13 +1,11 @@
-# gphotos-gallery
+# gphotos-cdn
 
-A photo gallery for gphotos-scraper
+A simple web application to extract the public URL of your images stored in Google Photos.
 
 ## Description
+gphotos-cdn allows you to get the public URL of your images and paste them on your blog, website or wherever you want.
 
-gphotos-gallery allow you to see your photos extracted using [gphotos-scraper](https://github.com/jmsalazardev/gphotos-scraper) and copy the public url.
-
-
-
+Features:
 - copy photo's public url
 - display basic information such:
     - filename
@@ -18,7 +16,11 @@ gphotos-gallery allow you to see your photos extracted using [gphotos-scraper](h
 
 
 ## Demo
-https://jmsalazardev.github.io/gphotos-gallery/
+https://gphotos-cdn.web.app/
+
+*user:* `demo@jmsalazar.dev`
+
+*password:* `appDemo2022`
 
 
 
@@ -26,24 +28,17 @@ https://jmsalazardev.github.io/gphotos-gallery/
 
 1. Clone this repository to destination folder:
 
-`git clone https://github.com/jmsalazardev/gphotos-gallery.git`
+`git clone https://github.com/jmsalazardev/gphotos-cdn.git`
 
-`cd gphotos-gallery`
+`cd gphotos-cdn`
 
 2. Install dependencies:
 
 `npm install`
 
 3. Start:
-
-`npm start`
-
-<a name="usage"></a>
-
-## Usage
-
-1. Copy your album.json and photo.json in public/data 
-2. Start the application
+`npm run start:emulators`
+`npm run start`
 
 <a name="technology"></a>
 
@@ -52,6 +47,9 @@ https://jmsalazardev.github.io/gphotos-gallery/
 - [React](https://https://reactjs.org/)
 - [React Redux](https://react-redux.js.org/)
 - [MUI](https://mui.com/)
-- [Husky](https://github.com/typicode/husky)
 - [Prettier](https://prettier.io/)
 - [ESLint](https://eslint.org/)
+- [Firebase](https://firebase.google.com/docs/cli)
+- [Firestore](https://firebase.google.com/docs/firestore/)
+- [Authentication](https://firebase.google.com/docs/auth/)
+- [Cloud Storage](https://firebase.google.com/docs/storage)
