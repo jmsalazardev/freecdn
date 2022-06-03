@@ -45,6 +45,12 @@ export default function Albums() {
     }
   };
 
+  const handleRefresh = () => {
+    setAnchorEl(null);
+    dispatch(fetchAlbums());
+  };
+  
+
   const { albums } = useSelector((state: RootState) => state.albums);
 
   useEffect(() => {
@@ -124,6 +130,7 @@ export default function Albums() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleAdd}>Add</MenuItem>
+                <MenuItem onClick={handleRefresh}>Refresh</MenuItem>
               </Menu>
             </div>
         </Toolbar>
