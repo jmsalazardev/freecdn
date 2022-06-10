@@ -17,7 +17,8 @@ jobs:
           npm install firebase-tools
           cd functions
           npm install
-      - run: npm run build
+      - name: Build
+        run: npm run build
         env:
           REACT_APP_FIREBASE_API_KEY: '${{ secrets.REACT_APP_FIREBASE_API_KEY }}'
           REACT_APP_FIREBASE_AUTH_DOMAIN: '${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}'
@@ -27,7 +28,8 @@ jobs:
           REACT_APP_FIREBASE_APP_ID: '${{ secrets.REACT_APP_FIREBASE_APP_ID }}'
           REACT_APP_FIREBASE_MEASUREMENT_ID: '${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID }}'
           REACT_APP_API_URL: '${{ secrets.REACT_APP_API_URL }}'
-      - run: npm run deploy
+      - name: Deploy
+        run: npm run deploy
         env:
           FIREBASE_TOKEN: '${ secrets.FIREBASE_TOKEN }'
 
