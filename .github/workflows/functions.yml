@@ -17,19 +17,27 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@master
+  
+      - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    # And of course we need to goto our functions folder to deploy
-    - name: Install npm packages
-      run: |
-        cd functions
-        npm install
-    # Deploying the functions to firebase
-    - name:  Deploy to Firebase
-      uses: w9jds/firebase-action@master
-      with:
-          args: deploy --only functions
-      env:
-          FIREBASE_TOKEN: '${{ secrets.FIREBASE_TOKEN }}'
+      # Install npm packages and firebase
+      - name: Install npm packages
+        run: |
+          cd functions
+          npm install
+          npm audit fix
+          npm install firebase-tools
+          
+      # Run tests
+      - name: Run tests
+        run: |
+          cd functions
+          npm run test
+          
+      # Deploying the functions to firebase
+      - name: Deploy to Firebase
+        run: |
+          cd functions
+          npm run deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
