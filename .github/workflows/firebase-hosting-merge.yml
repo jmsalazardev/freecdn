@@ -11,8 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install firebase-tools
-        run: npm install firebase-tools
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install firebase-tools
+          cd functions
+          npm install
       - run: npm run build
         env:
           REACT_APP_FIREBASE_API_KEY: '${{ secrets.REACT_APP_FIREBASE_API_KEY }}'
