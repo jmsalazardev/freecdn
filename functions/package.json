@@ -24,7 +24,7 @@
     "firebase": "^9.8.2",
     "firebase-admin": "^10.2.0",
     "firebase-functions": "^3.21.2",
-    "gphotos-scraper": "^1.1.0",
+    "gphotos-scraper": "^2.0.0",
     "json5": "^2.2.1",
     "mime-types": "^2.1.35",
     "node-blob": "^0.0.2",
