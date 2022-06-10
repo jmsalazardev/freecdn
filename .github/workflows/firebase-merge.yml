@@ -14,7 +14,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install firebase-tools
           cd functions
           npm install
       - name: Build
@@ -28,10 +27,10 @@ jobs:
           REACT_APP_FIREBASE_APP_ID: '${{ secrets.REACT_APP_FIREBASE_APP_ID }}'
           REACT_APP_FIREBASE_MEASUREMENT_ID: '${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID }}'
           REACT_APP_API_URL: '${{ secrets.REACT_APP_API_URL }}'
-      - name: Deploy
-        run: npx firebase deploy --only functions,hosting
+      - name: Deploy to Firebase
+        uses: doonstore/firebase-deploy@v1
+        with:
+          params: --only hosting,functions
         env:
-          FIREBASE_TOKEN: '${ secrets.FIREBASE_TOKEN }'
-          
-
-
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_PROJECT: ${{ secrets.FIREBASE_PROJECT }}
