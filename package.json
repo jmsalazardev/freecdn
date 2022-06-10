@@ -54,10 +54,7 @@
     "prettier:fix": "prettier src/**/*.{js,ts,tsx} --write --no-error-on-unmatched-pattern",
     "prettier:check": "prettier src/**/*.{js,ts,tsx} --check --no-error-on-unmatched-pattern",
     "npm:npm-check-updates": "npx npm-check-updates --errorLevel 1",
-    "npm:upgrade": "npx npm-check-updates -iu",
-    "deploy": "run-p deploy:*",
-    "deploy:functions": "firebase deploy --only functions",
-    "deploy:hosting": "firebase deploy --only hosting"
+    "npm:upgrade": "npx npm-check-updates -iu"
   },
   "browserslist": {
     "production": [
