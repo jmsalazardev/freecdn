@@ -30,7 +30,7 @@ jobs:
       - name: Deploy to Firebase
         uses: jmsalazardev/firebase-deploy@main
         with:
-          params: --only hosting,functions
+          params: --only hosting,functions --force
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           FIREBASE_PROJECT: ${{ secrets.FIREBASE_PROJECT }}
