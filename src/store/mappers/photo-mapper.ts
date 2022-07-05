@@ -2,10 +2,10 @@ import { QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore";
 import { Photo } from "../../models/photo";
 
 export const toFirestore = (photo: Photo) => {
-    const {id, name, url} = photo;
+    const {id, filename, url} = photo;
     return {
         id,
-        name,
+        filename,
         url,
     };
 };

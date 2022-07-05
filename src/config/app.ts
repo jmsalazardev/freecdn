@@ -6,10 +6,12 @@ const {
     PUBLIC_URL: publicUrl,
     NODE_ENV: env,
     REACT_APP_API_URL: apiUrl,
+    MUI_X_LICENSE_PRO: license
 } = process.env;
 
 export const appConfig = {
     publicUrl,
     isDev: env === 'development',
-    apiUrl: env === 'development' ? emulatorsConfig.functions.url : apiUrl, 
+    apiUrl: env === 'development' ? emulatorsConfig.functions.url : apiUrl,
+    license: license || '',
 };

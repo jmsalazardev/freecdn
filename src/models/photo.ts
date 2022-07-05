@@ -1,22 +1,11 @@
-export class Photo {
-    type: string;
+export interface Photo {
     id: string;
+    description: string;
     url: string;
-    name: string;
+    filename: string;
+    size: number;
     width: number;
     height: number;
-
-    constructor (id: string, url: string, name: string, width: number,  height: number) {
-        
-        this.type = "Photo";
-        this.id = id;
-        this.url = url;
-        this.name = name;
-        this.width = width;
-        this.height=height;
-    }
-
-    toString() {
-        return JSON.stringify(this);
-    }
+    createdAt: number;
+    mimeType: string;
 }

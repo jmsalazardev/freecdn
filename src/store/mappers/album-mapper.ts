@@ -17,4 +17,4 @@ export const fromFirestore = (snapshot: QueryDocumentSnapshot): Album=> {
     return {id, title, url} as Album;
 };
 
-export const toModel = (data: any): Album=> new Album(data);
+export const toModel = (data: any): Album => data;

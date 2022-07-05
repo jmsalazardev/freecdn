@@ -25,6 +25,8 @@ export const test = https.onRequest(async (req, res) => {
   try {
     if (!uid || !id) throw new BadRequestException();
 
+    
+
     res.status(200).json({
       code: 200,
       message: "OK",
