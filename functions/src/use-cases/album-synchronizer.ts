@@ -1,6 +1,5 @@
 import fs from "fs";
 import {Service, Inject} from "typedi";
-import {lookup} from "mime-types";
 import {
   AlbumService,
   AlbumBucketService,
@@ -31,12 +30,23 @@ export class AlbumSynchronizer {
 
     if (user && isValidUser(user)) this.logger.info("user validated");
 
-    const album = await this.albumService.getAlbum(input.albumId);
-    if (album && canUserWriteAlbum(user, album)) {
-      this.logger.info("user is allowed to write on this album");
+    
+
+    let gAlbum, album;
+    if (input.albumId.length <= 20) {
+      gAlbum = await extractAlbum(`https://photos.app.goo.gl/${input.albumId}`);
+      if (!gAlbum) throw new AlbumNotFoundException();
+    } else {
+      album = await this.albumService.getAlbum(input.albumId);
+      if (album && canUserWriteAlbum(user, album)) {
+        this.logger.info("user is allowed to write on this album");
+        gAlbum = await extractAlbum(album.url);
+        
+      }
+      
     }
 
-    const gAlbum = await extractAlbum(`https://photos.app.goo.gl/${input.albumId}`);
+    
     if (!gAlbum) throw new AlbumNotFoundException();
 
     const {id: albumId, url, title} = gAlbum;
