@@ -6,7 +6,7 @@ const {
     PUBLIC_URL: publicUrl,
     NODE_ENV: env,
     REACT_APP_API_URL: apiUrl,
-    MUI_X_LICENSE_PRO: license
+    REACT_APP_LICENSE: license
 } = process.env;
 
 export const appConfig = {
