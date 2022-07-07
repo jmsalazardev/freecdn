@@ -2,8 +2,13 @@
 
 A simple web application to extract the public URL of your images stored in Google Photos.
 
+![gphotos free cdn](https://lh3.googleusercontent.com/Sk5CUG0RWXaEmVGyktEHJOymfWWyRR2jjeucVEbtirrjcYZV2Wvj2z_R0_v5S3CvPSplLdtEVzH1CbR-QrQ9ZWC0RKdi_GnjAR8ir-yUWW596JviVhuUpfrhG_2bdzUgYXomQV-GO_A)
+
+
 ## Description
 gphotos-cdn allows you to get the public URL of your images and paste them on your blog, website or wherever you want.
+
+**IMPORTANT:** This app is currently under development, it may be unstable. If you want to contribute please let me know on twitter.
 
 Features:
 - copy photo's public url
@@ -13,6 +18,10 @@ Features:
     - file size
     - image size
     - creation date
+- resize
+- crop
+- common size pressets
+
 
 
 ## Demo
@@ -37,6 +46,7 @@ https://gphotos-cdn.web.app/
 `npm install`
 
 3. Start:
+
 `npm run start:emulators`
 `npm run start`
 
