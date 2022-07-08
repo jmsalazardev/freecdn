@@ -22,7 +22,7 @@ export default function Albums() {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const addAlbumRef = useRef<{show: Function}>(null);
+  const addAlbumRef = useRef<{ show: Function }>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -38,8 +38,8 @@ export default function Albums() {
 
   const handleAdd = () => {
     setAnchorEl(null);
-    
-    const {current} = addAlbumRef;
+
+    const { current } = addAlbumRef;
     if (current) {
       current.show();
     }
@@ -49,7 +49,6 @@ export default function Albums() {
     setAnchorEl(null);
     dispatch(fetchAlbums());
   };
-  
 
   const { albums } = useSelector((state: RootState) => state.albums);
 
@@ -70,17 +69,19 @@ export default function Albums() {
 
   const hasAlbum = albums.length > 0;
 
-  const items = hasAlbum ?
+  const items = hasAlbum ? (
     albums.map((album, index) => (
-        <ListItemButton
-          key={album.id}
-          selected={selectedIndex === index}
-          onClick={(event) => handleListItemClick(event, index)}
-        >
-          <ListItemText primary={album.title} secondary={album.url} />
-        </ListItemButton>
-    )) :
-    <ListItemText key='Subheader' primary="No albums found" />;
+      <ListItemButton
+        key={album.id}
+        selected={selectedIndex === index}
+        onClick={(event) => handleListItemClick(event, index)}
+      >
+        <ListItemText primary={album.title} secondary={album.url} />
+      </ListItemButton>
+    ))
+  ) : (
+    <ListItemText key='Subheader' primary='No albums found' />
+  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -96,43 +97,40 @@ export default function Albums() {
           >
             <ArrowBack />
           </IconButton>
-          <Typography
-            variant='h6'
-            noWrap
-            component='div'
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          ></Typography>
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+            Albums
+          </Typography>
 
           <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <MoreVert />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleAdd}>Add</MenuItem>
-                <MenuItem onClick={handleRefresh}>Refresh</MenuItem>
-              </Menu>
-            </div>
+            <IconButton
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
+              onClick={handleMenu}
+              color='inherit'
+            >
+              <MoreVert />
+            </IconButton>
+            <Menu
+              id='menu-appbar'
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleAdd}>Add</MenuItem>
+              <MenuItem onClick={handleRefresh}>Refresh</MenuItem>
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
 

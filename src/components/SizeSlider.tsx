@@ -11,10 +11,10 @@ const Input = styled(MuiInput)`
   width: 64px;
 `;
 
-export default function SizeSlider(props: {maxSize: number}) {
-  const [value, setValue] = React.useState<number | string | Array<number | string>>(
-    30,
-  );
+export default function SizeSlider(props: { maxSize: number }) {
+  const [value, setValue] = React.useState<
+    number | string | Array<number | string>
+  >(30);
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue);
@@ -32,15 +32,15 @@ export default function SizeSlider(props: {maxSize: number}) {
     }
   };
 
-  const {maxSize} = props;
+  const { maxSize } = props;
   const minSize = 10;
-  
+
   return (
     <Box>
-      <Typography id="input-slider" gutterBottom>
+      <Typography id='input-slider' gutterBottom>
         Size
       </Typography>
-      <Grid container spacing={2} alignItems="center">
+      <Grid container spacing={2} alignItems='center'>
         <Grid item>
           <PhotoSizeSelectLargeIcon />
         </Grid>
@@ -50,13 +50,13 @@ export default function SizeSlider(props: {maxSize: number}) {
             max={maxSize}
             value={typeof value === 'number' ? value : 10}
             onChange={handleSliderChange}
-            aria-labelledby="input-slider"
+            aria-labelledby='input-slider'
           />
         </Grid>
         <Grid item>
           <Input
             value={value}
-            size="small"
+            size='small'
             onChange={handleInputChange}
             onBlur={handleBlur}
             inputProps={{

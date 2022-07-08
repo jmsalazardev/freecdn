@@ -10,7 +10,7 @@ export interface SimpleSnackbarProps {
     info?: string;
     warning?: string;
     error?: string;
-  }
+  };
 }
 
 export default function SimpleSnackbar(props: SimpleSnackbarProps) {
@@ -21,7 +21,7 @@ export default function SimpleSnackbar(props: SimpleSnackbarProps) {
 
   useEffect(() => {
     setOpen(true);
-    const {info, warning, error} = notification;
+    const { info, warning, error } = notification;
     if (info) {
       setMessage(info);
       setSeverity('info');
@@ -32,11 +32,12 @@ export default function SimpleSnackbar(props: SimpleSnackbarProps) {
       setMessage(error);
       setSeverity('error');
     }
-
-    
   }, [notification]);
 
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -46,16 +47,16 @@ export default function SimpleSnackbar(props: SimpleSnackbarProps) {
 
   const action = (
     <React.Fragment>
-      <Button color="secondary" size="small" onClick={handleClose}>
+      <Button color='secondary' size='small' onClick={handleClose}>
         UNDO
       </Button>
       <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
+        size='small'
+        aria-label='close'
+        color='inherit'
         onClick={handleClose}
       >
-        <CloseIcon fontSize="small" />
+        <CloseIcon fontSize='small' />
       </IconButton>
     </React.Fragment>
   );
@@ -69,11 +70,9 @@ export default function SimpleSnackbar(props: SimpleSnackbarProps) {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         action={action}
       >
-      
         <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
           {message}
         </Alert>
-
       </Snackbar>
     </div>
   );

@@ -1,6 +1,6 @@
 {
   "name": "gphotos-cdn",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple web application to extract the public URL of your images stored in Google Photos",
   "private": false,
   "keywords": [
@@ -28,6 +28,7 @@
     "@types/react-window": "^1.8.5",
     "es6-shim": "^0.35.6",
     "firebase": "^9.8.1",
+    "firebase-functions": "^3.22.0",
     "react": "^18.0.0",
     "react-copy-to-clipboard": "^5.0.4",
     "react-cropper": "^2.1.8",

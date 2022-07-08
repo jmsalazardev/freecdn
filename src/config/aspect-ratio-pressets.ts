@@ -5,7 +5,7 @@ export const aspectRatioPressets = [
     id: 'aspect-ratio-custom',
     name: 'Custom',
     width: NaN,
-    height: NaN
+    height: NaN,
   },
   {
     id: 'aspect-ratio-11',

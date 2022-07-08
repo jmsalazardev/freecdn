@@ -1,26 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import MoreVert from '@mui/icons-material/MoreVert';
 import Typography from '@mui/material/Typography';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import { RootState, useAppDispatch } from '../store';
 import { fetchAlbumById } from '../store/thunks';
 import { useParams } from 'react-router-dom';
-import Photos from '../components/Photos';
+import PhotoEditor from '../components/PhotoEditor';
+import MoreVert from '@mui/icons-material/MoreVert';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Menu, MenuItem } from '@mui/material';
-import { syncAlbum } from '../store/thunks/syncAlbum';
+import Fab from '@mui/material/Fab';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-export default function Album() {
-  const { id } = useParams();
+export default function Photo() {
+  const { albumId, id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { album } = useSelector((state: RootState) => state.albumById);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const { album } = useSelector((state: RootState) => state.albumById);
+
+  const photoEditorRef = useRef<{ open: Function; copy: Function }>(null);
+
+  useEffect(() => {
+    dispatch(fetchAlbumById(`${albumId}`));
+  }, [albumId]);
+
+  if (!album) return <></>;
+
+  console.log({ album, albumId, id });
+  // const albumTitle = album?.title || '';
+
+  const handleBackButtonClick = async () => {
+    goBack();
+  };
+
+  const goBack = () => {
+    navigate(`/albums/${album?.id}`);
+  };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -30,23 +51,30 @@ export default function Album() {
     setAnchorEl(null);
   };
 
-  const handleSync = () => {
-    dispatch(syncAlbum(`${id}`));
+  const handleOpen = () => {
+    const { current } = photoEditorRef;
+
+    if (current) current.open();
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    dispatch(fetchAlbumById(`${id}`));
-  }, [id]);
+  const handleCopyToClipboard = async () => {
+    const { current } = photoEditorRef;
 
-  const handleBackButtonClick = async () => {
-    navigate('/albums');
+    if (current) current.copy();
+    setAnchorEl(null);
   };
 
-  if (!album) return <></>;
+  const photo = album.photos.find((item) => item.id === id);
+
+  if (!photo) return <></>;
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <div
+      style={{
+        overflowX: 'auto',
+      }}
+    >
       <AppBar position='static'>
         <Toolbar>
           <IconButton
@@ -59,8 +87,9 @@ export default function Album() {
           >
             <ArrowBack />
           </IconButton>
+
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            {album.title}
+            Editor
           </Typography>
 
           <div>
@@ -89,12 +118,30 @@ export default function Album() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleSync}>Sync</MenuItem>
+              <MenuItem onClick={handleOpen}>
+                <OpenInNewIcon />
+                Open
+              </MenuItem>
             </Menu>
           </div>
         </Toolbar>
       </AppBar>
-      <Photos album={album} />
-    </Box>
+      <div style={{ marginBottom: '4em' }}>
+        <PhotoEditor photo={photo} ref={photoEditorRef} />
+      </div>
+
+      <Fab
+        color='primary'
+        aria-label='add'
+        onClick={handleCopyToClipboard}
+        style={{
+          position: 'absolute',
+          bottom: 16,
+          right: 16,
+        }}
+      >
+        <ContentCopyIcon />
+      </Fab>
+    </div>
   );
 }

@@ -3,12 +3,12 @@ import Typography from '@mui/material/Typography';
 import { Button, Container, Grid, TextField } from '@mui/material';
 import { logIn } from '../services/auth-service';
 import SimpleSnackbar from '../components/SimpleSnackbar';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const navigate = useNavigate();
   const [snackbar, setSnackbar] = useState({});
-  const [credential, setCredential] = useState({ username: "", password: "" });
+  const [credential, setCredential] = useState({ username: '', password: '' });
 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -26,16 +26,21 @@ export default function Login() {
 
     if (username === '' || password === '') return;
 
-    logIn(username, password).then(() => {
-      navigate('/', { replace: true });
-    }).catch((reason) => {
-      setSnackbar({ error: reason.message });
-    });
-
+    logIn(username, password)
+      .then(() => {
+        navigate('/', { replace: true });
+      })
+      .catch((reason) => {
+        setSnackbar({ error: reason.message });
+      });
   };
 
-  const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    const { target: { name, value } } = event;
+  const handleTextChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const {
+      target: { name, value },
+    } = event;
     const newState = { ...credential };
     switch (name) {
       case 'username':
@@ -46,51 +51,49 @@ export default function Login() {
         newState.password = value;
         setCredential(newState);
     }
-  }
+  };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth='sm'>
       <Grid container>
         <Grid item>
-
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Sign in
           </Typography>
           <form noValidate onSubmit={handleFormSubmit}>
             <TextField
               onChange={(event) => handleTextChange(event)}
-              variant="outlined"
-              margin="normal"
+              variant='outlined'
+              margin='normal'
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
+              id='username'
+              label='Username'
+              name='username'
               autoFocus
             />
             <TextField
               onChange={(event) => handleTextChange(event)}
-              variant="outlined"
-              margin="normal"
+              variant='outlined'
+              margin='normal'
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
+              autoComplete='current-password'
             />
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
-              color="primary"
-            // onClick={(event)=>handleLogin(event)}
+              variant='contained'
+              color='primary'
+              // onClick={(event)=>handleLogin(event)}
             >
               Sign In
             </Button>
           </form>
-
         </Grid>
       </Grid>
       <SimpleSnackbar notification={snackbar} />

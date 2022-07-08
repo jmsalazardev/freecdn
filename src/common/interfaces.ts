@@ -1,5 +1,5 @@
-import { Album } from "../models/album";
-import { Photo } from "../models/photo";
+import { Album } from '../models/album';
+import { Photo } from '../models/photo';
 
 /*
 export interface Photo {
@@ -21,6 +21,13 @@ export interface Album {
   photos: Photo[];
 }
 */
+
+export interface AlbumState {
+  album: Album | null;
+  error: string | null;
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+}
+
 export interface AlbumsState {
   albums: Album[];
   error: string | null;

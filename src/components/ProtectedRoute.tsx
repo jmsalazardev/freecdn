@@ -1,27 +1,27 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {isLoggedIn} from '../services/auth-service'; 
+import { isLoggedIn } from '../services/auth-service';
 
 type Props = {
-  children: JSX.Element,
+  children: JSX.Element;
 };
 
 export const ProtectedRoute = ({ children }: Props) => {
   const navigate = useNavigate();
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const logged = isLoggedIn();
+  console.log({ logged });
 
   useEffect(() => {
-    if (!logged)  navigate('/login');
+    if (!logged) navigate('/login');
 
     // setIsAuthenticated(logged);
-  },[logged]);
+  }, [logged]);
   /*
   if(isAuthenticated) {
     navigate('/login');
   }
   */
-  
-  
+
   return children;
 };

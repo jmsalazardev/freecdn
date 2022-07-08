@@ -5,6 +5,7 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import Home from './routes/home';
 import Albums from './routes/albums';
 import Album from './routes/album';
+import Photo from './routes/photo';
 import { appConfig } from './config'
 import './App.css';
 import Login from './routes/login';
@@ -33,6 +34,11 @@ function App() {
             </ProtectedRoute>
           } />
 
+          <Route path='/albums/:albumId/photo/:id' element={
+            <ProtectedRoute>
+              <Photo />
+            </ProtectedRoute>
+          } />
         </Routes>
       </BrowserRouter>
       </StyledEngineProvider>
