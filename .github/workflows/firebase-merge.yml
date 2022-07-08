@@ -27,6 +27,7 @@ jobs:
           REACT_APP_FIREBASE_APP_ID: '${{ secrets.REACT_APP_FIREBASE_APP_ID }}'
           REACT_APP_FIREBASE_MEASUREMENT_ID: '${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID }}'
           REACT_APP_API_URL: '${{ secrets.REACT_APP_API_URL }}'
+          REACT_APP_STORAGE_URL: '${{ secrets.REACT_APP_STORAGE_URL }}'
           REACT_APP_LICENSE: '${{ secrets.REACT_APP_LICENSE }}'
       - name: Deploy to Firebase
         uses: jmsalazardev/firebase-deploy@main
