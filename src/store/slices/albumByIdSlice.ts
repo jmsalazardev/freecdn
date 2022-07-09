@@ -19,11 +19,14 @@ export const albumByIdSlice = createSlice({
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(fetchAlbumById.fulfilled, (state: AlbumState, action: {payload: Album | null}) => {
-        state.status = 'succeeded';
-        state.error = null;
-        state.album = action.payload;
-      })
+      .addCase(
+        fetchAlbumById.fulfilled,
+        (state: AlbumState, action: { payload: Album | null }) => {
+          state.status = 'succeeded';
+          state.error = null;
+          state.album = action.payload;
+        }
+      )
       .addCase(fetchAlbumById.rejected, (state: AlbumState, action: any) => {
         state.status = 'failed';
         state.error = action.error.message;

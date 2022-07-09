@@ -6,7 +6,7 @@ import Home from './routes/home';
 import Albums from './routes/albums';
 import Album from './routes/album';
 import Photo from './routes/photo';
-import { appConfig } from './config'
+import { appConfig } from './config';
 import './App.css';
 import Login from './routes/login';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -16,35 +16,42 @@ LicenseInfo.setLicenseKey(appConfig.license);
 
 function App() {
   return (
-    <div className="App" id="app">
+    <div className='App' id='app'>
       <StyledEngineProvider injectFirst>
         <BrowserRouter basename={appConfig.publicUrl}>
-        <Routes>
-        
-          <Route path='/'  element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/albums' element={
-            <ProtectedRoute>
-              <Albums />
-            </ProtectedRoute>
-            } />
-          <Route path='/albums/:id' element={
-            <ProtectedRoute>
-              <Album />
-            </ProtectedRoute>
-          } />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route
+              path='/albums'
+              element={
+                <ProtectedRoute>
+                  <Albums />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/albums/:id'
+              element={
+                <ProtectedRoute>
+                  <Album />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route path='/albums/:albumId/photo/:id' element={
-            <ProtectedRoute>
-              <Photo />
-            </ProtectedRoute>
-          } />
-        </Routes>
-      </BrowserRouter>
+            <Route
+              path='/albums/:albumId/photo/:id'
+              element={
+                <ProtectedRoute>
+                  <Photo />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
       </StyledEngineProvider>
     </div>
   );
 }
-
 
 export default App;

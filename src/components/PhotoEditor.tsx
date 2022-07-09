@@ -57,7 +57,6 @@ function PhotoEditor(
   useImperativeHandle(ref, () => ({ open, copy }));
 
   function open(): void {
-    console.log('open!');
     const generatedUrl = getUrl();
     if (generatedUrl) window.open(generatedUrl);
   }
@@ -72,19 +71,10 @@ function PhotoEditor(
   }
 
   useEffect(() => {
-    console.log({ isLoaded });
     if (!isLoaded) return;
     if (!cropperRef.current) return;
     const { cropper } = cropperRef.current;
     if (!cropper) return;
-
-    console.log('dataUpdated', {
-      zoom,
-      flipHoriz,
-      flipVert,
-      rotation,
-      aspectRatioPresset,
-    });
 
     cropper.scale(flipHoriz, flipVert);
 
@@ -179,7 +169,6 @@ function PhotoEditor(
 
     const generatedUrl = `${photo.url}=${params.join('-')}`;
 
-    console.log('generatedUrl:', generatedUrl);
     return generatedUrl;
   };
 
@@ -201,7 +190,6 @@ function PhotoEditor(
   const handleSizePressetChange = (event: SelectChangeEvent) => {
     const id = event.target.value;
 
-    console.log('handleSizePressetChange', id);
     setSizePresset(id);
   };
 
@@ -268,39 +256,39 @@ function PhotoEditor(
   const marks = [
     {
       value: 10,
-      label: '10px',
+      label: '10',
     },
     {
       value: 320,
-      label: '320px',
+      label: '32',
     },
     {
       value: 540,
-      label: '540px',
+      label: '540',
     },
     {
       value: 720,
-      label: '720px',
+      label: '720',
     },
     {
       value: 960,
-      label: '960px',
+      label: '960',
     },
     {
       value: 1140,
-      label: '1140px',
+      label: '1140',
     },
     {
       value: 1600,
-      label: '1600px',
+      label: '1600',
     },
     {
       value: 1920,
-      label: '1920px',
+      label: '1920',
     },
     {
       value: 2560,
-      label: '2560px',
+      label: '2560',
     },
   ];
 
@@ -394,9 +382,7 @@ function PhotoEditor(
 
           <Grid item xs={12}>
             <Cropper
-              src={`${photo.url}=w${photo.width}-h${photo.height}`}
-              // style={{ height: 400, width: '100%' }}
-              // Cropper.js options
+              src={`${photo.url}=s${screen.width > 500 ? 500 : screen.width }`}
               initialAspectRatio={16 / 9}
               guides={false}
               ref={cropperRef}

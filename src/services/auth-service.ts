@@ -7,8 +7,6 @@ import { auth } from './firebase';
 import { User } from '../models';
 
 export const isLoggedIn = (): boolean => {
-  // console.log('auth', auth);
-  // console.log('currentUser', auth.currentUser);
   return getCurrentUser() ? true : false;
 };
 

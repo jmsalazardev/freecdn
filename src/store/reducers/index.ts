@@ -7,6 +7,4 @@ const rootReducer = combineReducers({
   albumById: albumByIdSlice.reducer,
 });
 
-
-
 export default rootReducer;

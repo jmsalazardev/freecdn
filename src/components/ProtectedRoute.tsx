@@ -10,7 +10,6 @@ export const ProtectedRoute = ({ children }: Props) => {
   const navigate = useNavigate();
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const logged = isLoggedIn();
-  console.log({ logged });
 
   useEffect(() => {
     if (!logged) navigate('/login');

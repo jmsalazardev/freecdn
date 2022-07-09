@@ -17,18 +17,9 @@ export default function Photos(props: PhotosProps) {
   const { album } = props;
 
   const navigate = useNavigate();
-  const [pageSize, setPageSize] = React.useState<number>(5);
+  const [pageSize, setPageSize] = React.useState<number>(20);
 
   const handleOpenEditor = (photo: Photo) => {
-    /*
-    const {current} = photoEditorRef;
-    console.log({current})
-    if (current) {
-      current.show(photo);
-    }
-    */
-    console.log(photo);
-
     navigate(`/albums/${album.id}/photo/${photo.id}`);
   };
 

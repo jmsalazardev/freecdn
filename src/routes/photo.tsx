@@ -32,9 +32,6 @@ export default function Photo() {
 
   if (!album) return <></>;
 
-  console.log({ album, albumId, id });
-  // const albumTitle = album?.title || '';
-
   const handleBackButtonClick = async () => {
     goBack();
   };
