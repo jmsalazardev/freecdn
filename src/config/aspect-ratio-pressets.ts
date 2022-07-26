@@ -119,4 +119,11 @@ export const aspectRatioPressets = [
     height: 1,
     orientation: 'square',
   },
+  {
+    id: 'aspect-ratio-gnews-rectangularlogo',
+    name: 'Google News - Rectangular Logo',
+    width: 10,
+    height: 1,
+    orientation: 'landscape',
+  },
 ];
