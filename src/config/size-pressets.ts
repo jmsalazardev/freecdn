@@ -277,4 +277,11 @@ export const sizePressets = [
     height: 2736,
     aspectRatioRef: 'aspect-ratio-23',
   },
+  {
+    id: 'size-400x40-gnews',
+    name: 'Google News - Rectangular Logo',
+    width: 400,
+    height: 40,
+    aspectRatioRef: 'aspect-ratio-gnews-rectangularlogo',
+  },
 ];
