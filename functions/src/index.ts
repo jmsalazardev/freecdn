@@ -44,6 +44,14 @@ export const test = https.onRequest(async (req, res) => {
 export const sync = runWith({
   // memory: "1GB",
 }).https.onRequest(async (req, res) => {
+  /*
+  await new Promise(r => setTimeout(r, 3000));
+  res.status(200).json({
+    code: 200,
+    message: "OK",
+  });
+  return;
+  */
   const { uid, id } = req.query;
 
   try {

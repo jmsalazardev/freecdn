@@ -382,7 +382,7 @@ function PhotoEditor(
 
           <Grid item xs={12}>
             <Cropper
-              src={`${photo.url}=s${screen.width > 500 ? 500 : screen.width }`}
+              src={`${photo.url}=s${screen.width > 500 ? 500 : screen.width}`}
               initialAspectRatio={16 / 9}
               guides={false}
               ref={cropperRef}

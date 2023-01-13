@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Album, Photo } from '../models';
 import {
@@ -7,7 +7,8 @@ import {
   GridColDef,
   MuiEvent,
 } from '@mui/x-data-grid-pro';
-import { Avatar } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export interface PhotosProps {
   album: Album;
@@ -63,6 +64,37 @@ export default function Photos(props: PhotosProps) {
       headerName: 'Created At',
       type: 'dateTime',
       valueGetter: ({ value }) => new Date(value * 1.0),
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      sortable: false,
+      renderCell: (params) => {
+        const photo = params.row as Photo;
+
+        const handleClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
+          e.stopPropagation();
+          const { url, width, height, filename, description } = photo;
+          const alt = filename
+            .split('-')
+            .join(' ')
+            .replace('.jpg', '')
+            .replace('.png', '')
+            .replace('.jpeg', '');
+          const generatedUrl = `![${alt}](${url}#width=${width}&height=${height} ${description})`;
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(generatedUrl);
+          } else {
+            prompt('Copy not supported, please copy manually', generatedUrl);
+          }
+        };
+
+        return (
+          <Button onClick={handleClick}>
+            <ContentCopyIcon />
+          </Button>
+        );
+      },
     },
   ];
 
