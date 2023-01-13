@@ -81,7 +81,7 @@ export default function Photos(props: PhotosProps) {
             .replace('.jpg', '')
             .replace('.png', '')
             .replace('.jpeg', '');
-          const generatedUrl = `![${alt}](${url}#width=${width}&height=${height} ${description})`;
+          const generatedUrl = `![${alt}](${url}#width=${width}&height=${height} "${description}")`;
           if (navigator.clipboard) {
             await navigator.clipboard.writeText(generatedUrl);
           } else {
