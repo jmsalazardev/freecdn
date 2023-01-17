@@ -27,7 +27,7 @@ export default function Home() {
             component='div'
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            GPHOTOS-CDN
+            FreeCDN
           </Typography>
         </Toolbar>
       </AppBar>

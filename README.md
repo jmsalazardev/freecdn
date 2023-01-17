@@ -1,4 +1,4 @@
-# gphotos-cdn
+# FreeCDN
 
 A simple web application to extract the public URL of your images stored in Google Photos.
 
@@ -6,7 +6,7 @@ A simple web application to extract the public URL of your images stored in Goog
 
 
 ## Description
-gphotos-cdn allows you to get the public URL of your images and paste them on your blog, website or wherever you want.
+FreeCDN allows you to get the public URL of your images and paste them on your blog, website or wherever you want.
 
 **IMPORTANT:** This app is currently under development, it may be unstable. If you want to contribute please let me know on twitter.
 
@@ -25,7 +25,7 @@ Features:
 
 
 ## Demo
-https://gphotos-cdn.web.app/
+https://freecdn.jmsalazar.dev/
 
 *user:* `demo@jmsalazar.dev`
 
@@ -37,9 +37,9 @@ https://gphotos-cdn.web.app/
 
 1. Clone this repository to destination folder:
 
-`git clone https://github.com/jmsalazardev/gphotos-cdn.git`
+`git clone https://github.com/jmsalazardev/freecdn.git`
 
-`cd gphotos-cdn`
+`cd freecdn`
 
 2. Install dependencies:
 

@@ -1,9 +1,11 @@
 {
-  "name": "gphotos-cdn",
+  "name": "freecdn",
   "version": "1.2.1",
   "description": "A simple web application to extract the public URL of your images stored in Google Photos",
   "private": false,
   "keywords": [
+    "cdn",
+    "free cdn",
     "google photos",
     "gallery",
     "react",
