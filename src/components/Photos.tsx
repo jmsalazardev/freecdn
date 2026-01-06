@@ -75,13 +75,14 @@ export default function Photos(props: PhotosProps) {
         const handleClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
           e.stopPropagation();
           const { url, width, height, filename, description } = photo;
-          const alt = filename
+          const title = filename
             .split('-')
             .join(' ')
             .replace('.jpg', '')
             .replace('.png', '')
             .replace('.jpeg', '');
-          const generatedUrl = `![${alt}](${url}#width=${width}&height=${height} "${description}")`;
+          const alt = description.length > 0 ? description : title;
+          const generatedUrl = `![${alt}](${url}#width=${width}&height=${height} "${title}")`;
           if (navigator.clipboard) {
             await navigator.clipboard.writeText(generatedUrl);
           } else {
