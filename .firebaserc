@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "gphotos-cdn"
-  }
+  },
+  "targets": {
+    "gphotos-cdn": {
+      "hosting": {
+        "gphotos-cdn": [
+          "gphotos-cdn"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

@@ -7,7 +7,7 @@
     ]
   },
   "hosting": {
-    "target": "freecdn-web",
+    "target": "gphotos-cdn",
     "public": "build",
     "ignore": [
       "firebase.json",
