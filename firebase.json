@@ -7,6 +7,7 @@
     ]
   },
   "hosting": {
+    "target": "freecdn-web",
     "public": "build",
     "ignore": [
       "firebase.json",
